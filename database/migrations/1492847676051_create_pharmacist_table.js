@@ -8,8 +8,6 @@ class PharmacistTableSchema extends Schema {
     this.create('pharmacists', (table) => {
       table.increments()
       table.timestamps()
-      table.integer('userID').unsigned().index().references('id').inTable('employees')
-      // table.foreign('username').reference('employees.username')
       table.string('name')
       table.string('TelpNo').unique()
     })

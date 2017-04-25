@@ -10,14 +10,14 @@ class EmployeesTableSchema extends Schema {
       table.timestamps()
       table.string('username').unique()
       table.string('password')
-      table.integer('role')
+      table.integer('adminId').unsigned().index().references('id').inTable('admins')
+      table.integer('PharmacistId').unsigned().index().references('id').inTable('pharmacists')
+      table.integer('cashierId').unsigned().index().references('id').inTable('cashiers')
     })
   }
 
   down () {
     this.dropIfExists('employees')
   }
-
 }
-
 module.exports = EmployeesTableSchema

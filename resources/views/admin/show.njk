@@ -1,0 +1,57 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-8 col-md-offset-2">
+		<table>
+			<tr>
+				<td style="padding-right: 10px;">
+
+    				{{ form.open({ route: 'admin.edit', params: {id: admin.id} }) }}
+    					{{ form.button('Update','', { class: 'btn btn-success '}) }}
+    				{{ form.close() }}
+
+    			</td>
+    			<td>
+    				{{ form.open({ route: 'admin.destroy', params: {id: admin.id} }) }}
+    					{{csrfField}}
+    					{{ form.button('Delete','', { class: 'btn btn-danger '}) }}
+
+    				{{ form.close() }}
+    			</td>
+    		</tr>
+		</table>
+		<br>
+		<br>
+		<table class="table table-striped">
+			<tbody>
+				<tr>
+					<th class="col-md-2">id</td>
+					<td class="col-md-6">{{ admin.id }}</td>
+				</tr>
+				<tr>
+					<th class="col-md-2">Create Date</th>
+					<td class="col-md-6">{{ admin.created_at }}</td>
+				</tr>
+				<tr>
+					<th class="col-md-2">Update Date</th>
+					<td class="col-md-6">{{ admin.updated_at }}</td>
+				</tr>
+				<tr>
+					<th class="col-md-2">Name</th>
+					<td class="col-md-6">{{ admin.name }}</td>
+				</tr>
+				<tr>
+					<th class="col-md-2">User Id</th>
+					<td class="col-md-6">{{ admin.userId }}</td>
+				</tr>
+				<tr>
+					<th class="col-md-2">Telephone Number</th>
+					<td class="col-md-6">{{ admin.TelpNo }}</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

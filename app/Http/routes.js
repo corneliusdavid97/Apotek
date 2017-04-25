@@ -16,5 +16,8 @@
 */
 
 const Route = use('Route')
-
+Route.get('login','LoginController.login')
+Route.resource('cashier','CashierController')
+Route.resource('admin','AdminController')
+Route.resource('pharmacist','PharmacistController')
 Route.on('/').render('welcome')

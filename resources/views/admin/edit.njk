@@ -1,0 +1,58 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-offset-2">
+		{% if successMessage %}
+			<div class="alert alert-success alert-dismissable">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success!</strong> {{successMessage}}.
+			</div>
+		{% endif %}
+		{% if old('errors') %}
+			<div class="alert alert-danger alert-dismissable">
+				{% for error in old('errors') %}
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<li> {{ error.message }} </li>
+				{% endfor %}
+			</div>
+
+		{% endif %}
+		</div>
+		<div class="form-horizontal">
+		{{ form.open({ route: 'admin.update', params: {id: admin.id} }) }}
+
+			{{csrfField}}
+
+			<div class="form-group">
+				{{ form.label('name','Admin Name',{ class: 'col-sm-2 control-label'}) }}
+    			<div class="col-sm-6">
+      				{{ form.text('name',admin.name,{ class: 'form-control'})}}
+    			</div>
+    		</div>
+
+    		<div class="form-group">
+				{{ form.label('userId','User Id',{ class: 'col-sm-2 control-label'}) }}
+    			<div class="col-sm-6">
+      				{{ form.text('User Id',admin.userId,{ class: 'form-control'})}}
+    			</div>
+    		</div>
+
+    		<div class="form-group">
+				{{ form.label('TelpNo','Telephone Number',{ class: 'col-sm-2 control-label'}) }}
+    			<div class="col-sm-6">
+      				{{ form.text('Telephone Number',admin.TelpNo,{ class: 'form-control'})}}
+    			</div>
+    		</div>
+
+    		<div class="form-group">
+    			<div class="col-sm-offset-2 col-sm-10">
+    				{{ form.submit('Update','submit', { class: ' btn btn-success'}) }}
+    			</div>
+    		</div>
+    	{{ form.close() }}
+		</div>
+	</div>
+
+{% endblock %}

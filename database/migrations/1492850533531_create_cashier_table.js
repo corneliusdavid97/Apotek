@@ -8,7 +8,6 @@ class CashiersTableSchema extends Schema {
     this.create('cashiers', (table) => {
       table.increments()
       table.timestamps()
-      table.integer('userID').unsigned().index().references('id').inTable('employees')
       table.string('name')
       table.string('TelpNo').unique()
     })

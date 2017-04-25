@@ -8,9 +8,8 @@ class AdminsTableSchema extends Schema {
     this.create('admins', (table) => {
       table.increments()
       table.timestamps()
-      table.integer('userID').unsigned().index().references('id').inTable('employees')
       table.string('name')
-      table.string('NoTelp').unique()
+      table.string('TelpNo').unique()
     })
   }
 

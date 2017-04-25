@@ -1,0 +1,39 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-12 col-md-offset-0">
+
+    		{{ form.open({route: 'cashier.create'}) }}
+    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
+    		{{ form.close() }}
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Create Date</th>
+					<th>Update Date</th>
+					<th>Name</th>
+					<th>userId</th>
+					<th>NameL</th>
+					<th>Telephone Number</th>
+				</tr>
+			</thead>
+				<tbody>
+				{% for cashier in cashier%}
+					<tr>
+						<td>{{ cashier.id }}</td>
+						<td>{{ cashier.created_at }}</td>
+						<td>{{ cashier.updated_at }}</td>
+						<td>{{ cashier.name }}</td>
+						<td>{{ cashier.userId }}</td>
+						<td>{{ cashier.TelpNo }}</td>
+						<th><a href="cashier/{{cashier.id}}">View</a></th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

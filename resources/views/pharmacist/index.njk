@@ -1,0 +1,36 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-12 col-md-offset-0">
+
+    		{{ form.open({route: 'pharmacist.create'}) }}
+    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
+    		{{ form.close() }}
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Create Date</th>
+					<th>Update Date</th>
+					<th>Name</th>
+					<th>Telephone Number</th>
+				</tr>
+			</thead>
+				<tbody>
+				{% for pharmacist in pharmacist%}
+					<tr>
+						<td>{{ pharmacist.id }}</td>
+						<td>{{ pharmacist.created_at }}</td>
+						<td>{{ pharmacist.updated_at }}</td>
+						<td>{{ pharmacist.name }}</td>
+						<td>{{ pharmacist.TelpNo }}</td>
+						<th><a href="pharmacist/{{pharmacist.id}}">View</a></th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

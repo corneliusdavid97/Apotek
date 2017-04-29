@@ -10,9 +10,7 @@ class EmployeesTableSchema extends Schema {
       table.timestamps()
       table.string('username').unique()
       table.string('password')
-      table.integer('adminId').unsigned().index().references('id').inTable('admins')
-      table.integer('PharmacistId').unsigned().index().references('id').inTable('pharmacists')
-      table.integer('cashierId').unsigned().index().references('id').inTable('cashiers')
+      table.integer('role')
     })
   }
 

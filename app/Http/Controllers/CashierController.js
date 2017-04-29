@@ -24,13 +24,13 @@ class CashierController {
   * show(request, response) {
     //show selected data from database
     const cashier=yield Cashier.findBy('id',request.param('id'))
-    yield response.sendView('cashier/show',{supir:supir.toJSON()})
+    yield response.sendView('cashier/show',{cashier:cashier.toJSON()})
   }
 
   * edit(request, response) {
     //edit showed data
-    const cashierData = request.except('_csrf','submit')
-    yield response.sendView('cashier/show',{supir:supir.toJSON()})
+    const cashier=yield Cashier.findBy('id',request.param('id'))
+    yield response.sendView('cashier/edit',{cashier:cashier.toJSON()})
   }
 
   * update(request, response) {
@@ -47,7 +47,7 @@ class CashierController {
   * destroy(request, response) {
     //delete selected data
     const cashier=yield Cashier.findBy('id',request.param('id'))
-    yield supir.delete()
+    yield cashier.delete()
     yield response.redirect('/cashier')
   }
 

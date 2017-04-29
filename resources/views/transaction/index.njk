@@ -1,0 +1,38 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-10 col-md-offset-1">
+
+    		{{ form.open({route: 'transaction.create'}) }}
+    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
+    		{{ form.close() }}
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Create Date</th>
+					<th>Update Date</th>
+					<th>Transaction Amount</th>
+					<th>Cashier Id</th>
+					<th>Consumer Id</th>
+				</tr>
+			</thead>
+				<tbody>
+				{% for transaction in transaction%}
+					<tr>
+						<td>{{ transaction.id }}</td>
+						<td>{{ transaction.created_at }}</td>
+						<td>{{ transaction.updated_at }}</td>
+						<td>{{ transaction.transactionAmount }}</td>
+						<td>{{ transaction.cashierId }}</td>
+						<td>{{ transaction.consumerID }}</td>
+						<th><a href="transaction/{{transaction.id}}">View</a></th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

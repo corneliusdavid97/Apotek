@@ -2,8 +2,8 @@
 
 const Lucid = use('Lucid')
 
-class Compoundedmedicine extends Lucid {
+class CompoundedMedicine extends Lucid {
 
 }
 
-module.exports = Compoundedmedicine
+module.exports = CompoundedMedicine

@@ -8,8 +8,7 @@ class TransactionsTableSchema extends Schema {
     this.create('transactions', (table) => {
       table.increments()
       table.timestamps()
-      table.date('transactionDate')
-      table.time('transactionTime')
+      table.integer('transactionAmount')
       table.integer('cashierID').unsigned().index().references('id').inTable('cashiers')
       table.integer('consumerID').unsigned().index().references('id').inTable('consumers')
     })

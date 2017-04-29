@@ -24,13 +24,13 @@ class AdminController {
   * show(request, response) {
     //show selected data from database
     const admin=yield Admin.findBy('id',request.param('id'))
-    yield response.sendView('admin/show',{supir:supir.toJSON()})
+    yield response.sendView('admin/show',{admin:admin.toJSON()})
   }
 
   * edit(request, response) {
     //edit showed data
-    const adminData = request.except('_csrf','submit')
-    yield response.sendView('admin/show',{supir:supir.toJSON()})
+    const admin=yield Admin.findBy('id',request.param('id'))
+    yield response.sendView('admin/edit',{admin:admin.toJSON()})
   }
 
   * update(request, response) {
@@ -47,7 +47,7 @@ class AdminController {
   * destroy(request, response) {
     //delete selected data
     const admin=yield Admin.findBy('id',request.param('id'))
-    yield supir.delete()
+    yield admin.delete()
     yield response.redirect('/admin')
   }
 

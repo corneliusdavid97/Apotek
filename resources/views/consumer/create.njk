@@ -1,0 +1,72 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-10 col-md-offset-2">
+		<div class="col-md-offset-2">
+		{% if successMessage %}
+			<div class="alert alert-success alert-dismissable">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success!</strong> {{successMessage}}.
+			</div>
+		{% endif %}
+		{% if old('errors') %}
+			<div class="alert alert-danger alert-dismissable">
+				{% for error in old('errors') %}
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<li> {{ error.message }} </li>
+				{% endfor %}
+			</div>
+
+		{% endif %}
+		</div>
+		<div class="form-horizontal">
+		{{ form.open({route: 'consumer.store'}) }}
+
+			{{csrfField}}
+
+			<div class="form-group">
+			{{ form.label('name','Consumer Name',{ class: 'col-sm-2 control-label'}) }}
+				<div class="col-sm-6">
+						{{ form.text('name','',{ class: 'form-control'})}}
+				</div>
+			</div>
+
+			<div class="form-group">
+				{{ form.label('address','Address',{ class: 'col-sm-2 control-label'}) }}
+    			<div class="col-sm-6">
+      				{{ form.text('address','',{ class: 'form-control'})}}
+    			</div>
+    		</div>
+
+				<div class="form-group">
+				{{ form.label('TelpNo','Telephone Number',{ class: 'col-sm-2 control-label'}) }}
+    			<div class="col-sm-6">
+      				{{ form.text('TelpNo','',{ class: 'form-control'})}}
+    			</div>
+    		</div>
+
+				<div class="form-group">
+				{{ form.label('haveKIS','KIS Status',{ class: 'col-sm-2 control-label'}) }}
+    			<div class="col-sm-6">
+      				{{ form.checkbox('haveKIS','true',false)}}
+    			</div>
+    		</div>
+
+				<div class="form-group">
+				{{ form.label('birthDate','Birth Date',{ class: 'col-sm-2 control-label'}) }}
+    			<div class="col-sm-6">
+      				{{form.date('birthDate')}}
+    			</div>
+    		</div>
+
+    		<div class="form-group">
+    			<div class="col-sm-offset-2 col-sm-10">
+    				{{ form.submit('Create','submit', { class: ' btn btn-success'}) }}
+    			</div>
+    		</div>
+    	{{ form.close() }}
+		</div>
+	</div>
+
+{% endblock %}

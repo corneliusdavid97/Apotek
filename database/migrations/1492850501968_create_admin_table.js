@@ -10,6 +10,7 @@ class AdminsTableSchema extends Schema {
       table.timestamps()
       table.string('name')
       table.string('TelpNo').unique()
+      table.integer('userID').unsigned().index().references('id').inTable('employees')
     })
   }
 

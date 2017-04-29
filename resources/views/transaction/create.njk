@@ -1,0 +1,58 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-10 col-md-offset-2">
+		<div class="col-md-offset-2">
+		{% if successMessage %}
+			<div class="alert alert-success alert-dismissable">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success!</strong> {{successMessage}}.
+			</div>
+		{% endif %}
+		{% if old('errors') %}
+			<div class="alert alert-danger alert-dismissable">
+				{% for error in old('errors') %}
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<li> {{ error.message }} </li>
+				{% endfor %}
+			</div>
+
+		{% endif %}
+		</div>
+		<div class="form-horizontal">
+		{{ form.open({route: 'transaction.store'}) }}
+
+			{{csrfField}}
+
+			<div class="form-group">
+			{{ form.label('transactionAmount','Transaction Amount',{ class: 'col-sm-2 control-label'}) }}
+				<div class="col-sm-6">
+						{{ form.text('transactionAmount','',{ class: 'form-control'})}}
+				</div>
+			</div>
+
+			<div class="form-group">
+			{{ form.label('cashierId','Cashier Id',{ class: 'col-sm-2 control-label'}) }}
+				<div class="col-sm-6">
+						{{ form.text('cashierId','',{ class: 'form-control'})}}
+				</div>
+			</div>
+
+			<div class="form-group">
+			{{ form.label('consumerId','Consumer Id',{ class: 'col-sm-2 control-label'}) }}
+				<div class="col-sm-6">
+						{{ form.text('consumerId','',{ class: 'form-control'})}}
+				</div>
+			</div>
+
+    		<div class="form-group">
+    			<div class="col-sm-offset-2 col-sm-10">
+    				{{ form.submit('Create','submit', { class: ' btn btn-success'}) }}
+    			</div>
+    		</div>
+    	{{ form.close() }}
+		</div>
+	</div>
+
+{% endblock %}

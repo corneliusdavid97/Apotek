@@ -1,0 +1,36 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-12 col-md-offset-0">
+
+    		{{ form.open({route: 'employee.create'}) }}
+    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
+    		{{ form.close() }}
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Create Date</th>
+					<th>Update Date</th>
+					<th>Username</th>
+					<th>Division</th>
+				</tr>
+			</thead>
+				<tbody>
+				{% for employee in employee%}
+					<tr>
+						<td>{{ employee.id }}</td>
+						<td>{{ employee.created_at }}</td>
+						<td>{{ employee.updated_at }}</td>
+						<td>{{ employee.username }}</td>
+						<td>{{ employee.role }}</td>
+						<th><a href="employee/{{employee.id}}">View</a></th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

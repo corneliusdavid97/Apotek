@@ -29,7 +29,7 @@ class EmployeeController {
 
   * edit(request, response) {
     //edit showed data
-    cconst employee=yield Employee.findBy('id',request.param('id'))
+    const employee=yield Employee.findBy('id',request.param('id'))
     yield response.sendView('employee/edit',{employee:employee.toJSON()})
   }
 
@@ -39,9 +39,7 @@ class EmployeeController {
     const employee=yield Employee.findBy('id',request.param('id'))
     employee.username=employeeData.username
     employee.password=employeeData.password
-    employee.adminId=employeeData.adminId
-    employee.PharmacistId=employeeData.PharmacistId
-    employee.cashierId=employeeData.cashierId
+    employee.role=employeeData.role
     yield employee.save()
     yield response.redirect(request.param('id'))
   }

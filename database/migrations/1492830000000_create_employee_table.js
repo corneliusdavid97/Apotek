@@ -10,7 +10,7 @@ class EmployeesTableSchema extends Schema {
       table.timestamps()
       table.string('username').unique()
       table.string('password')
-      table.integer('role')
+      table.string('role')
     })
   }
 

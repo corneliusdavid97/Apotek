@@ -11,7 +11,7 @@ class ConsumersTableSchema extends Schema {
       table.string('name')
       table.string('address')
       table.string('TelpNo')
-      table.boolean('haveKIS')
+      table.string('KISNumber')
       table.date('birthDate')
       table.integer('age')
     })

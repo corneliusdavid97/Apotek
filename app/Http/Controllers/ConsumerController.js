@@ -42,7 +42,7 @@ class ConsumerController {
     consumer.name=consumerData.name
     consumer.address=consumerData.address
     consumer.TelpNo=consumerData.TelpNo
-    consumer.haveKIS=consumerData.haveKIS
+    consumer.KISNumber=consumerData.KISNumber
     consumer.birthDate=consumerData.birthDate
     yield consumer.save()
     yield response.redirect(request.param('id'))

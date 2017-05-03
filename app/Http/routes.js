@@ -16,10 +16,22 @@
 */
 
 const Route = use('Route')
-Route.get('login','LoginController.login')
 Route.resource('cashier','CashierController')
 Route.resource('admin','AdminController')
 Route.resource('pharmacist','PharmacistController')
 Route.resource('consumer','ConsumerController')
 Route.resource('transaction',"TransactionController")
-Route.on('/').render('welcome')
+Route.resource('basicMed',"BasicMedController")
+Route.resource('employee',"EmployeeController")
+Route.on('/').render('login')
+Route.on('/master').render('master')
+
+  Route.get('/login', 'AuthController.index')
+  Route.post('/login', 'AuthController.login')
+
+  Route.get('/register', 'RegisterController.index')
+  Route.post('register', 'RegisterController.doRegister')
+
+  Route.get('/got', function * (request, response) {
+    response.status(200).json({ user: 'prosper' })
+}).middleware('auth')

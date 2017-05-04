@@ -3,66 +3,65 @@
 {% block content %}
 
 	<div class="col-md-8 col-md-offset-2">
-		<table>
-			<tr>
-				<td style="padding-right: 10px;">
 
-    				{{ form.open({ route: 'consumer.edit', params: {id: consumer.id} }) }}
-    					{{ form.button('Update','', { class: 'btn btn-success '}) }}
-    				{{ form.close() }}
-
-    			</td>
-    			<td>
-    				{{ form.open({ route: 'consumer.destroy', params: {id: consumer.id} }) }}
-    					{{csrfField}}
-    					{{ form.button('Delete','', { class: 'btn btn-danger '}) }}
-
-    				{{ form.close() }}
-    			</td>
-    		</tr>
-		</table>
 		<br>
 		<br>
 		<table class="table table-striped">
 			<tbody>
 				<tr>
-					<th class="col-md-2">id</td>
-					<td class="col-md-6">{{ consumer.id }}</td>
+					<th class="col-md-2">Id</td>
+					<td class="col-md-6">{{ employee.id }}</td>
 				</tr>
 				<tr>
 					<th class="col-md-2">Create Date</th>
-					<td class="col-md-6">{{ consumer.created_at }}</td>
+					<td class="col-md-6">{{ employee.created_at }}</td>
 				</tr>
 				<tr>
 					<th class="col-md-2">Update Date</th>
-					<td class="col-md-6">{{ consumer.updated_at }}</td>
+					<td class="col-md-6">{{ employee.updated_at }}</td>
 				</tr>
 				<tr>
 					<th class="col-md-2">Name</th>
-					<td class="col-md-6">{{ consumer.name }}</td>
+					<td class="col-md-6">{{ employee.name }}</td>
 				</tr>
 				<tr>
-					<th class="col-md-2">Address</th>
-					<td class="col-md-6">{{ consumer.address }}</td>
+					<th class="col-md-2">Username</th>
+					<td class="col-md-6">{{ employee.username }}</td>
+				</tr>
+				<tr>
+					<th class="col-md-2">Password</th>
+					<td class="col-md-6">{{ employee.password }}</td>
 				</tr>
 				<tr>
 					<th class="col-md-2">Telephone Number</th>
-					<td class="col-md-6">{{ consumer.TelpNo }}</td>
+					<td class="col-md-6">{{ employee.TelpNo }}</td>
 				</tr>
 				<tr>
-					<th class="col-md-2">KIS Status</th>
-					<td class="col-md-6">{{ consumer.haveKIS }}</td>
+					<th class="col-md-2">Role</th>
+					<td class="col-md-6">{{ employee.role }}</td>
 				</tr>
-				<tr>
-					<th class="col-md-2">Birth Date</th>
-					<td class="col-md-6">{{ consumer.birthDate }}</td>
-				</tr>
-				<tr>
-					<th class="col-md-2">Age</th>
-					<td class="col-md-6">{{ consumer.age }}</td>
-				</tr>
-
 			</tbody>
+		</table>
+		<table>
+			<tr>
+				<td style="padding-right: 10px;">
+    				{{ form.open({ route: 'employee.edit', params: {id: employee.id} }) }}
+    					{{ form.button('Edit','', { class: 'btn btn-success '}) }}
+    				{{ form.close() }}
+
+    			</td>
+    			<td>
+    				{{ form.open({ route: 'employee.destroy', params: {id: employee.id} }) }}
+    					{{csrfField}}
+    					{% if employee.role == 'Admin'%}
+							<button type="button" class="btn btn-danger" disabled>Delete</button>
+							{% else %}
+							{{ form.button('Delete','', { class: 'btn btn-danger '}) }}
+							{% endif %}
+
+    				{{ form.close() }}
+    			</td>
+    		</tr>
 		</table>
 	</div>
 

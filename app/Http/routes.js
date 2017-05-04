@@ -25,13 +25,10 @@ Route.resource('basicMed',"BasicMedController")
 Route.resource('employee',"EmployeeController")
 Route.on('/').render('login')
 Route.on('/master').render('master')
+Route.on('/register').render('register')
 
   Route.get('/login', 'AuthController.index')
   Route.post('/login', 'AuthController.login')
 
   Route.get('/register', 'RegisterController.index')
   Route.post('register', 'RegisterController.doRegister')
-
-  Route.get('/got', function * (request, response) {
-    response.status(200).json({ user: 'prosper' })
-}).middleware('auth')

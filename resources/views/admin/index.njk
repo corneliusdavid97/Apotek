@@ -2,38 +2,27 @@
 
 {% block content %}
 
-	<div class="col-md-12 col-md-offset-0">
+	<div class="col-md-10 col-md-offset-1">
+			<h1 class="page-header">Welcome, {{ currentUser.username }} </h1>
 
-    		{{ form.open({route: 'admin.create'}) }}
-    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
+			<br>
+			<div class="col-md-2 col-md-offset-1">
+    		{{ form.open({route: 'employee.index'}) }}
+    			{{ form.button('Employee IUD','', { class: 'btn btn-success'}) }}
     		{{ form.close() }}
+			</div>
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>Create Date</th>
-					<th>Update Date</th>
-					<th>Name</th>
-					<th>userId</th>
-					<th>NameL</th>
-					<th>Telephone Number</th>
-				</tr>
-			</thead>
-				<tbody>
-				{% for admin in admin%}
-					<tr>
-						<td>{{ admin.id }}</td>
-						<td>{{ admin.created_at }}</td>
-						<td>{{ admin.updated_at }}</td>
-						<td>{{ admin.name }}</td>
-						<td>{{ admin.userId }}</td>
-						<td>{{ admin.TelpNo }}</td>
-						<th><a href="admin/{{admin.id}}">View</a></th>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+			<div class="col-md-2 col-md-offset-1">
+    		{{ form.open({route: 'basicMed.index'}) }}
+    			{{ form.button('Basic Medicine IUD','', { class: 'btn btn-success'}) }}
+    		{{ form.close() }}
+			</div>
+			<div class="col-md-2 col-md-offset-1">
+    		{{ form.open({route: 'consumer.index'}) }}
+    			{{ form.button('Consumer IUD','', { class: 'btn btn-success'}) }}
+    		{{ form.close() }}
+			</div>
+
 	</div>
 
 {% endblock %}

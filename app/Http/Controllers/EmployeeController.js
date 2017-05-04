@@ -17,8 +17,34 @@ class EmployeeController {
 
   * store(request, response) {
     //store created data to database
-    const employeeData = request.except('_csrf','submit')
-    yield Employee.create(employeeData)
+    const user = new User()
+    user.username = request.input('username')
+    user.password = yield Hash.make(request.input('password'))
+    user.name = request.input('name')
+    user.TelpNo = request.input('TelpNo')
+    user.role=request.input('role')
+    if(user.role == 'Admin'){
+      const admin =new Admin()
+      admin.userID=user.id
+      yield admin.save()
+    }else if(user.role == 'Cashier'){
+      const cashier =new Cashier()
+      cashier.userID=user.id
+      yield cashier.save()
+    }else if(user.role == 'Pharmacist'){
+      const pharmacist =new Pharmacist()
+      pharmacist.userID=user.id
+      yield pharmacist.save()
+    }
+
+
+    yield user.save()
+
+    var registerMessage = {
+        success: 'Registration Successful! Now go ahead and login'
+    }
+
+    yield response.sendView('login', { registerMessage : registerMessage })
   }
 
   * show(request, response) {

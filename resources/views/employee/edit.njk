@@ -21,44 +21,51 @@
 		{% endif %}
 		</div>
 		<div class="form-horizontal">
-		{{ form.open({ route: 'consumer.update', params: {id: consumer.id} }) }}
+		{{ form.open({ route: 'employee.update', params: {id: employee.id} }) }}
 
 			{{csrfField}}
 
 			<div class="form-group">
 			{{ form.label('name','Consumer Name',{ class: 'col-sm-2 control-label'}) }}
 				<div class="col-sm-6">
-						{{ form.text('name',consumer.name,{ class: 'form-control'})}}
+						{{ form.text('name',employee.name,{ class: 'form-control'})}}
 				</div>
 			</div>
 
 			<div class="form-group">
-				{{ form.label('address','Address',{ class: 'col-sm-2 control-label'}) }}
+				{{ form.label('username','Username',{ class: 'col-sm-2 control-label'}) }}
     			<div class="col-sm-6">
-      				{{ form.text('address',consumer.address,{ class: 'form-control'})}}
+      				{{ form.text('username',employee.username,{ class: 'form-control'})}}
     			</div>
     		</div>
+
+				<div class="form-group">
+					{{ form.label('password','Password',{ class: 'col-sm-2 control-label'}) }}
+	    			<div class="col-sm-6">
+						<input type="text" name="fname" value={{employee.password}} class="form-control" disabled>
+	    			</div>
+	    		</div>
 
 				<div class="form-group">
 				{{ form.label('TelpNo','Telephone Number',{ class: 'col-sm-2 control-label'}) }}
     			<div class="col-sm-6">
-      				{{ form.text('TelpNo',consumer.TelpNo,{ class: 'form-control'})}}
+      				{{ form.text('TelpNo',employee.TelpNo,{ class: 'form-control'})}}
     			</div>
     		</div>
 
 				<div class="form-group">
-				{{ form.label('haveKIS','KIS Status',{ class: 'col-sm-2 control-label'}) }}
-    			<div class="col-sm-6">
-      				{{ form.checkbox('haveKIS','true',consumer.haveKIS)}}
-    			</div>
-    		</div>
-
-				<div class="form-group">
-				{{ form.label('birthDate','Birth Date',{ class: 'col-sm-2 control-label'}) }}
-    			<div class="col-sm-6">
-      				{{form.date('birthDate')}}
-    			</div>
-    		</div>
+						<label for="text" class="col-sm-2 control-label">Division</label>
+						<div class="col-md-6">
+						<select class="form-control" id="role" disabled><br/>
+										<option value="">{{employee.role}}</option>
+										<br>
+											<option value="Cashier">Cashier </option>
+										<br>
+										``<option value="Pharmacist">Pharmacist </option>
+										<br/>
+									</select>
+						</div>
+				</div>
 
     		<div class="form-group">
     			<div class="col-sm-offset-2 col-sm-10">

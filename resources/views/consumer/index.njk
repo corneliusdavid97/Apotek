@@ -2,12 +2,8 @@
 
 {% block content %}
 
-	<div class="col-md-12 col-md-offset-0">
-
-    		{{ form.open({route: 'consumer.create'}) }}
-    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
-    		{{ form.close() }}
-
+	<div class="col-md-10 col-md-offset-1">
+		<br>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -39,6 +35,10 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<br>
+		{{ form.open({route: 'consumer.create'}) }}
+			{{ form.button('Create New Consumer','', { class: 'btn btn-success'}) }}
+		{{ form.close() }}
 	</div>
 
 {% endblock %}

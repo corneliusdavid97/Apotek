@@ -2,20 +2,20 @@
 
 {% block content %}
 
-	<div class="col-md-12 col-md-offset-0">
-
-    		{{ form.open({route: 'employee.create'}) }}
-    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
-    		{{ form.close() }}
-
+<br>
+	<div class="col-md-10 col-md-offset-1">
+	<br>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>id</th>
 					<th>Create Date</th>
 					<th>Update Date</th>
+					<th>Name</th>
 					<th>Username</th>
-					<th>Division</th>
+					<th>Password</th>
+					<th>Telephone Number</th>
+					<th>Role</th>
 				</tr>
 			</thead>
 				<tbody>
@@ -24,13 +24,20 @@
 						<td>{{ employee.id }}</td>
 						<td>{{ employee.created_at }}</td>
 						<td>{{ employee.updated_at }}</td>
+						<td>{{ employee.name }}</td>
 						<td>{{ employee.username }}</td>
+						<td>{{ employee.password }}</td>
+						<td>{{ employee.TelpNo }}</td>
 						<td>{{ employee.role }}</td>
 						<th><a href="employee/{{employee.id}}">View</a></th>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
+		<br>
+		{{ form.open({route: 'employee.create'}) }}
+			{{ form.button('Create New Employee','', { class: 'btn btn-success'}) }}
+		{{ form.close() }}
 	</div>
 
 {% endblock %}

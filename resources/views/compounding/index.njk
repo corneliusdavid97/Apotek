@@ -1,0 +1,38 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-10 col-md-offset-1">
+
+		<br>
+		<br>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Create Date</th>
+					<th>Update Date</th>
+					<th>Basic Medicine Id</th>
+					<th>Compounded Medicine Id</th>
+				</tr>
+			</thead>
+				<tbody>
+				{% for compounding in compounding%}
+					<tr>
+						<td>{{ compounding.id }}</td>
+						<td>{{ compounding.created_at }}</td>
+						<td>{{ compounding.updated_at }}</td>
+						<td>{{ compounding.basicMedID }}</td>
+						<td>{{ compounding.compMedID }}</td>
+						<th><a href="compounding/{{compounding.id}}">View</a></th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+		{{ form.open({route: 'compounding.create'}) }}
+			{{ form.button('Create New Compounding','', { class: 'btn btn-success'}) }}
+		{{ form.close() }}
+	</div>
+
+{% endblock %}

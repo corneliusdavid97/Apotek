@@ -3,7 +3,8 @@
 
 
 {% block content %}
-
+<br>
+<br>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -44,16 +45,9 @@
                         </div>
 
 												<div class="form-group">
-														<label for="text" class="col-sm-2 control-label">Division</label>
+														<label for="text" class="col-sm-4 control-label">Division</label>
 														<div class="col-md-6">
-														<select class="form-control" id="role" required><br/>
-																		<option value="">Select Division</option>
-																		<br>
-																			<option value="Cashier">Cashier </option>
-																		<br>
-																		``<option value="Pharmacist">Pharmacist </option>
-																		<br/>
-																	</select>
+														{{ form.select('role', ['Cashier', 'Pharmacist'], null, 'Select Division',{class: 'form-control'}) }}
 														</div>
 												</div>
 

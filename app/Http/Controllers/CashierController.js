@@ -1,13 +1,16 @@
 'use strict'
 
 const Cashier = use('App/Model/Cashier')
+const Consumer = use('App/Model/Consumer')
+const Transaction = use('App/Model/Transaction')
 
 class CashierController {
 
   * index(request, response) {
     //show all data in database
     const cashier=yield Cashier.all()
-    yield response.sendView('cashier/index',{cashier:cashier.toJSON()})
+    const consumer=yield Consumer.all()
+    yield response.sendView('cashier/index',{cashier:cashier.toJSON(),consumer:consumer.toJSON()})
   }
 
   * create(request, response) {
@@ -18,6 +21,11 @@ class CashierController {
   * store(request, response) {
     //store created data to database
     const cashierData = request.except('_csrf','submit')
+    const transaction = new Transaction()
+    transaction.transactionAmount.cashierData.transactionAmount
+    transaction.cashierID=cashierData.cashierID
+    transaction.consumerID=cashierData.consumerID
+    yield transaction.save()
     yield Cashier.create(cashierData)
   }
 

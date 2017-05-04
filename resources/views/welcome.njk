@@ -13,6 +13,8 @@
 	<div class="container">
 		<h1>Welcome</h1>
 
+      {{ csrfField }}
+      
   		{{ form.open({url:'/'}) }}
 			<input type="text" placeholder="Username">
 			<input type="password" placeholder="Password">

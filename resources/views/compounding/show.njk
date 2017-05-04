@@ -8,43 +8,38 @@
 		<table class="table table-striped">
 			<tbody>
 				<tr>
-					<th class="col-md-2">Id</td>
-					<td class="col-md-6">{{ basicMed.id }}</td>
+					<th class="col-md-2">id</td>
+					<td class="col-md-6">{{ compounding.id }}</td>
 				</tr>
 				<tr>
 					<th class="col-md-2">Create Date</th>
-					<td class="col-md-6">{{ basicMed.created_at }}</td>
+					<td class="col-md-6">{{ compounding.created_at }}</td>
 				</tr>
 				<tr>
 					<th class="col-md-2">Update Date</th>
-					<td class="col-md-6">{{ basicMed.updated_at }}</td>
+					<td class="col-md-6">{{ compounding.updated_at }}</td>
 				</tr>
 				<tr>
-					<th class="col-md-2">Name</th>
-					<td class="col-md-6">{{ basicMed.name }}</td>
+					<th class="col-md-2">Basic Medicine Id</th>
+					<td class="col-md-6">{{ compounding.basicMedID }}</td>
 				</tr>
 				<tr>
-					<th class="col-md-2">Stock</th>
-					<td class="col-md-6">{{ basicMed.stock }}</td>
+					<th class="col-md-2">Compounding Medicine Id</th>
+					<td class="col-md-6">{{ compounding.compMedID }}</td>
 				</tr>
-				<tr>
-					<th class="col-md-2">Price Per Gram</th>
-					<td class="col-md-6">{{ basicMed.pricePerGram }}</td>
-				</tr>
-
 			</tbody>
 		</table>
 		<table>
 			<tr>
 				<td style="padding-right: 10px;">
 
-    				{{ form.open({ route: 'basicMed.edit', params: {id: basicMed.id} }) }}
+    				{{ form.open({ route: 'compounding.edit', params: {id: compounding.id} }) }}
     					{{ form.button('Update','', { class: 'btn btn-success '}) }}
     				{{ form.close() }}
 
     			</td>
     			<td>
-    				{{ form.open({ route: 'basicMed.destroy', params: {id: basicMed.id} }) }}
+    				{{ form.open({ route: 'compounding.destroy', params: {id: compounding.id} }) }}
     					{{csrfField}}
     					{{ form.button('Delete','', { class: 'btn btn-danger '}) }}
 
@@ -53,6 +48,5 @@
     		</tr>
 		</table>
 	</div>
-
 
 {% endblock %}

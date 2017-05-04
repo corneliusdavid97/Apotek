@@ -3,24 +3,6 @@
 {% block content %}
 
 	<div class="col-md-8 col-md-offset-2">
-		<table>
-			<tr>
-				<td style="padding-right: 10px;">
-
-    				{{ form.open({ route: 'consumer.edit', params: {id: consumer.id} }) }}
-    					{{ form.button('Update','', { class: 'btn btn-success '}) }}
-    				{{ form.close() }}
-
-    			</td>
-    			<td>
-    				{{ form.open({ route: 'consumer.destroy', params: {id: consumer.id} }) }}
-    					{{csrfField}}
-    					{{ form.button('Delete','', { class: 'btn btn-danger '}) }}
-
-    				{{ form.close() }}
-    			</td>
-    		</tr>
-		</table>
 		<br>
 		<br>
 		<table class="table table-striped">
@@ -50,8 +32,8 @@
 					<td class="col-md-6">{{ consumer.TelpNo }}</td>
 				</tr>
 				<tr>
-					<th class="col-md-2">KIS Status</th>
-					<td class="col-md-6">{{ consumer.haveKIS }}</td>
+					<th class="col-md-2">KIS Number</th>
+					<td class="col-md-6">{{ consumer.KISNumber }}</td>
 				</tr>
 				<tr>
 					<th class="col-md-2">Birth Date</th>
@@ -63,6 +45,25 @@
 				</tr>
 
 			</tbody>
+		</table>
+
+		<table>
+			<tr>
+				<td style="padding-right: 10px;">
+
+    				{{ form.open({ route: 'consumer.edit', params: {id: consumer.id} }) }}
+    					{{ form.button('Update','', { class: 'btn btn-success '}) }}
+    				{{ form.close() }}
+
+    			</td>
+    			<td>
+    				{{ form.open({ route: 'consumer.destroy', params: {id: consumer.id} }) }}
+    					{{csrfField}}
+    					{{ form.button('Delete','', { class: 'btn btn-danger '}) }}
+
+    				{{ form.close() }}
+    			</td>
+    		</tr>
 		</table>
 	</div>
 

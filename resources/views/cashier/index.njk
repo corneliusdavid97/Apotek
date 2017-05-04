@@ -43,7 +43,7 @@
                     <h1 class="page-header">Transaction</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <label style="margin-left:20px" id="cashierId">Cashier:</label>
+                <label style="margin-left:20px" id="cashierId">Cashier: {{currentUser.name}}</label>
             </div>
             <!-- /.row -->
 						<div class="row">
@@ -52,40 +52,112 @@
                         <div class="panel-heading">
                             Patient Details
                         </div>
+
                         <div class="panel-body">
                             <div class="row">
+                                {{ form.open( {route: 'consumer.store'}) }}
+                                  {{csrfField}}
                                 <div class="col-lg-6">
                                     <form role="form">
-
                                         <div class="form-group">
                                             <label>Name:</label>
-                                            <input class="form-control" placeholder="Enter name">
+                                            <input type="text" id="name" class="form-control" onkeyup="myFunction()" placeholder="Enter name here...">
                                         </div>
                                         <div class="form-group">
                                             <label>Birth date:</label>
-                                            {{form.date('birthDate','',{class: 'form-control'}) }}
+                                            {{form.date('birthDate',abirth.value,{class: 'form-control'}) }}
                                         </div>
 																				<div class="form-group">
                                             <label>KIS Number:</label>
-                                            <input class="form-control" placeholder="Enter KIS Number">
+                                            <input id="KISNumber" class="form-control" placeholder="Enter KIS Number" value={{akis.value}}>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
                                     <form role="form">
-																						<div class="form-group">
+																						<div class="form-group col-md 6">
 		                                            <label>Phone Number:</label>
-		                                            <input class="form-control" placeholder="Enter phone number">
+		                                            <input id="TelpNo" class="form-control" placeholder="Enter phone number">
 		                                        </div>
-		                                        <div class="form-group">
+		                                        <div class="form-group col-md 6">
 		                                            <label>Address:</label>
-		                                            <textarea class="form-control" rows="4"></textarea>
+		                                            <textarea id="address" class="form-control" rows="3"></textarea>
 		                                        </div>
+                                            <div class="form-group col-md-1">
+		                                            <label style="margin-left:-13px">Id:</label>
+		                                        </div>
+                                            <div class="col-md-2">
+		                                            <input style="margin-left:-30px" id="id" class="form-control" rows="3"></textarea>
+		                                        </div>
+                                            <div class="form-group col-md-2">
+                                              <button style="margin-left:-50px" type="submit" class="btn btn-success" id="submit">Submit</button>
+                                            </div>
                                     </form>
                                 </div>
+
+                                {{ form.close() }}
+
+                                <script>
+                                function myFunction() {
+                                  // Declare variables
+                                  var input, filter, table, tr, td, i;
+                                  input = document.getElementById("name");
+                                  filter = input.value.toUpperCase();
+                                  table = document.getElementById("myTable");
+                                  tr = table.getElementsByTagName("tr");
+
+                                  // Loop through all table rows, and hide those who don't match the search query
+                                  for (i = 0; i < tr.length; i++) {
+                                    td = tr[i].getElementsByTagName("td")[3];
+                                    if (td) {
+                                      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                        tr[i].style.display = "";
+                                        document.getElementById('KISNumber').value = tr[i].getElementsByTagName("td")[6].innerText
+                                        document.getElementById('TelpNo').value = tr[i].getElementsByTagName("td")[5].innerText
+                                        document.getElementById('Address').value = tr[i].getElementsByTagName("td")[4].innerText
+                                        document.getElementById('birthDate').value = tr[i].getElementsByTagName("td")[7].innerText
+                                        document.getElementById('id').value = tr[i].getElementsByTagName("td")[0].innerText
+                                      } else {
+                                        document.getElementById('KISNumber').value = ""
+                                        tr[i].style.display = "none";
+                                      }
+                                    }
+                                  }
+                                }
+                                </script>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
+                            <table id="myTable" class="table table-striped table-bordered table-hover row-clickable" data-href='url://'>
+                        			<thead>
+                        				<tr>
+                        					<th>id</th>
+                        					<th>Create Date</th>
+                        					<th>Update Date</th>
+                        					<th>Name</th>
+                        					<th>Address</th>
+                        					<th>Telp. Number</th>
+                        					<th>KIS Number</th>
+                        					<th>Birth Date</th>
+                        					<th>Age</th>
+                        				</tr>
+                        			</thead>
+                        				<tbody>
+                        				{% for consumer in consumer%}
+                        					<tr>
+                        						<td>{{ consumer.id }}</td>
+                        						<td>{{ consumer.created_at }}</td>
+                        						<td>{{ consumer.updated_at }}</td>
+                        						<td>{{ consumer.name }}</td>
+                        						<td>{{ consumer.address }}</td>
+                        						<td>{{ consumer.TelpNo }}</td>
+                        						<td>{{ consumer.KISNumber }}</td>
+                        						<td>{{ consumer.birthDate }}</td>
+                        						<td>{{ consumer.age }}</td>
+                        					</tr>
+                        				{% endfor %}
+                        			</tbody>
+                        		</table>
                             <!-- /.row (nested) -->
                         </div>
                         <!-- /.panel-body -->

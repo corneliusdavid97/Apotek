@@ -1,0 +1,36 @@
+{% extends 'master' %}
+
+{% block content %}
+
+	<div class="col-md-10 col-md-offset-1">
+
+		<br>
+		<br>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Create Date</th>
+					<th>Update Date</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+				<tbody>
+				{% for compMed in compMed%}
+					<tr>
+						<td>{{ compMed.id }}</td>
+						<td>{{ compMed.created_at }}</td>
+						<td>{{ compMed.updated_at }}</td>
+						<td>{{ compMed.price }}</td>
+						<th><a href="compMed/{{compMed.id}}">View</a></th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+		{{ form.open({route: 'compMed.create'}) }}
+			{{ form.button('Create New Compounded Medicine','', { class: 'btn btn-success'}) }}
+		{{ form.close() }}
+	</div>
+
+{% endblock %}

@@ -8,8 +8,9 @@ class CompoundingsTableSchema extends Schema {
     this.create('compoundings', (table) => {
       table.increments()
       table.timestamps()
-      table.integer('basicMedID').unsigned().index().references('id').inTable('basic_medicines')
       table.integer('compMedID').unsigned().index().references('id').inTable('compounded_medicines')
+      table.integer('basicMedID').unsigned().index().references('id').inTable('basic_medicines')
+      table.integer('quantity')
     })
   }
 

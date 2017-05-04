@@ -1,7 +1,8 @@
 {% extends 'master' %}
 
 {% block content %}
-
+<br>
+<br>
 	<div class="col-md-10 col-md-offset-2">
 		<div class="col-md-offset-2">
 		{% if successMessage %}
@@ -47,16 +48,16 @@
     		</div>
 
 				<div class="form-group">
-				{{ form.label('haveKIS','KIS Status',{ class: 'col-sm-2 control-label'}) }}
+				{{ form.label('KISNumber','KIS Number',{ class: 'col-sm-2 control-label'}) }}
     			<div class="col-sm-6">
-      				{{ form.checkbox('haveKIS','true',consumer.haveKIS)}}
+      				{{ form.text('KISNumber',consumer.KISNumber,{ class: 'form-control'})}}
     			</div>
     		</div>
 
 				<div class="form-group">
 				{{ form.label('birthDate','Birth Date',{ class: 'col-sm-2 control-label'}) }}
     			<div class="col-sm-6">
-      				{{form.date('birthDate')}}
+      				{{form.date('birthDate',consumer.birthDate,{ class: 'form-control'})}}
     			</div>
     		</div>
 

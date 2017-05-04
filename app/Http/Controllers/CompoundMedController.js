@@ -1,52 +1,67 @@
 'use strict'
 
-const CmpMed = use('App/Model/CompoundedMedicine')
+const CompMed = use('App/Model/CompoundedMedicine')
+const BasicMed = use('App/Model/BasicMedicine')
+const Compounding = use('App/Model/Compounding')
 
 class CompoundMedController {
 
   * index(request, response) {
     //show all data in database
-    const cmpMed=yield CmpMed.all()
-    yield response.sendView('cmpMed/index',{cmpMed:cmpMed.toJSON()})
+    const compMed=yield CompMed.all()
+    yield response.sendView('compMed/index',{compMed:compMed.toJSON()})
   }
 
   * create(request, response) {
     //create new data
-    yield response.sendView('cmpMed/create')
+    const compMed=yield Compounding.all()
+    var compMedLast = new CompMed()
+    yield response.sendView('compMed/create',{compMed:compMed.toJSON(),compMedLast:compMedLast.toJSON()})
   }
 
   * store(request, response) {
     //store created data to database
-    const cmpMedData = request.except('_csrf','submit')
-    yield CmpMed.create(cmpMedData)
+    const compMed = new CompMed()
+    var res=0
+    const compounding=yield Compounding.all()
+    console.log(compounding)
+    // for each (var cmp in compounding){
+    //   if(cmp.compMedID ==compMed.id){
+    //     const basicMed=yield BasicMed.findBy('id',request.param('id'))
+    //     res=res+basicMed.pricePerGram
+    //   }
+    // }
+    compMed.price=res
+
+    yield compMedData.save()
   }
 
   * show(request, response) {
     //show selected data from database
-    const cmpMed=yield CmpMed.findBy('id',request.param('id'))
-    yield response.sendView('cmpMed/show',{cmpMed:cmpMed.toJSON()})
+    const compMed=yield CompMed.findBy('id',request.param('id'))
+    yield response.sendView('compMed/show',{compMed:compMed.toJSON()})
   }
 
   * edit(request, response) {
     //edit showed data
-      const cmpMed=yield CmpMed.findBy('id',request.param('id'))
-    yield response.sendView('cmpMed/edit',{cmpMed:cmpMed.toJSON()})
+      const compMed=yield CompMed.findBy('id',request.param('id'))
+    yield response.sendView('compMed/edit',{compMed:compMed.toJSON()})
   }
 
   * update(request, response) {
     //update edited data
-    const cmpMedData = request.except('_csrf','submit')
-    const cmpMed=yield CmpMed.findBy('id',request.param('id'))
-    cmpMed.codeName=cmpMedData.codeName
-    yield cmpMed.save()
+    const compMedData = request.except('_csrf','submit')
+    const compMed=yield CompMed.findBy('id',request.param('id'))
+    compMed.codeName=compMedData.codeName
+    yield compMed.save()
     yield response.redirect(request.param('id'))
   }
 
   * destroy(request, response) {
     //delete selected data
-    const cmpMed=yield CmpMed.findBy('id',request.param('id'))
-    yield cmpMed.delete()
-    yield response.redirect('/cmpMed')
+    const compMed=yield CompMed.findBy('id',request.param('id'))
+    yield compMed.delete()
+    yield response.redirect('/compMed')
   }
 
 }

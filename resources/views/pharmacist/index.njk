@@ -2,35 +2,21 @@
 
 {% block content %}
 
-	<div class="col-md-12 col-md-offset-0">
+<div class="col-md-10 col-md-offset-1">
+		<h1 class="page-header">Welcome, {{ currentUser.name }} </h1>
 
-    		{{ form.open({route: 'pharmacist.create'}) }}
-    			{{ form.button('Create','', { class: 'btn btn-success'}) }}
-    		{{ form.close() }}
+		<br>
+		<div class="col-md-2 col-md-offset-1">
+			{{ form.open({route: 'basicMed.index'}) }}
+				{{ form.button('Basic Medicine IUD','', { class: 'btn btn-success'}) }}
+			{{ form.close() }}
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			{{ form.open({route: 'compounding.index'}) }}
+				{{ form.button('Compound Medicine','', { class: 'btn btn-success'}) }}
+			{{ form.close() }}
+		</div>
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>Create Date</th>
-					<th>Update Date</th>
-					<th>Name</th>
-					<th>Telephone Number</th>
-				</tr>
-			</thead>
-				<tbody>
-				{% for pharmacist in pharmacist%}
-					<tr>
-						<td>{{ pharmacist.id }}</td>
-						<td>{{ pharmacist.created_at }}</td>
-						<td>{{ pharmacist.updated_at }}</td>
-						<td>{{ pharmacist.name }}</td>
-						<td>{{ pharmacist.TelpNo }}</td>
-						<th><a href="pharmacist/{{pharmacist.id}}">View</a></th>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
+</div>
 
 {% endblock %}

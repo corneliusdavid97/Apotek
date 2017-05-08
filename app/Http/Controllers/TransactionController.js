@@ -18,7 +18,13 @@ class TransactionController {
   * store(request, response) {
     //store created data to database
     const transactionData = request.except('_csrf','submit')
-    yield Transaction.create(transactionData)
+    const currentUser=request.currentUser
+    const transaction=yield Transaction.last()
+    transaction.transactionAmount=transactionData.grandTotal
+    transaction.consumerID=transactionData.consumerID
+    transaction.cashier=currentUser.id
+    yield transaction.save()
+    yield response.redirect('/cashier')
   }
 
   * show(request, response) {

@@ -9,7 +9,9 @@ class PurchasingsTableSchema extends Schema {
       table.increments()
       table.timestamps()
       table.integer('compMedID').unsigned().index().references('id').inTable('compounded_medicines')
-      table.integer('transcationID').unsigned().index().references('id').inTable('transactions')
+      table.integer('transactionID').unsigned().index().references('id').inTable('transactions')
+      table.integer('quantity')
+      table.integer('totalPrice')
     })
   }
 

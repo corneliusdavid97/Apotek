@@ -1,8 +1,11 @@
 'use strict'
 
+const Database = use('Database')
 const Cashier = use('App/Model/Cashier')
 const Consumer = use('App/Model/Consumer')
 const Transaction = use('App/Model/Transaction')
+const CompMed = use('App/Model/CompoundedMedicine')
+const Purchasing = use('App/Model/Purchasing')
 
 class CashierController {
 
@@ -10,7 +13,16 @@ class CashierController {
     //show all data in database
     const cashier=yield Cashier.all()
     const consumer=yield Consumer.all()
-    yield response.sendView('cashier/index',{cashier:cashier.toJSON(),consumer:consumer.toJSON()})
+    const compMed=yield CompMed.all()
+    const purchasing=yield Purchasing.all()
+    var transaction= yield Transaction.last()
+    if(transaction==null || transaction.transactionAmount!=0){
+      transaction=new Transaction()
+      transaction.transactionAmount=0
+      yield transaction.save()
+    }
+    var total=yield Database.from('purchasings').sum('totalPrice as total').where('transactionID',transaction.id)
+    yield response.sendView('cashier/index',{cashier:cashier.toJSON(),consumer:consumer.toJSON(),compMed:compMed.toJSON(),transaction:transaction.toJSON(),purchasing:purchasing.toJSON(),total:total[0].total})
   }
 
   * create(request, response) {

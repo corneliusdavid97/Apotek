@@ -18,9 +18,9 @@ class ConsumerController {
   * store(request, response) {
     //store created data to database
     const consumerData = request.except('_csrf','submit')
-
     console.log(consumerData)
     yield Consumer.create(consumerData)
+    yield response.redirect('/cashier')
   }
 
   * show(request, response) {

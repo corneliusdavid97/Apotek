@@ -1,5 +1,6 @@
 'use strict'
 
+const Database = use('Database')
 const CompMed = use('App/Model/CompoundedMedicine')
 const BasicMed = use('App/Model/BasicMedicine')
 const Compounding = use('App/Model/Compounding')
@@ -15,25 +16,29 @@ class CompoundMedController {
   * create(request, response) {
     //create new data
     const compMed=yield Compounding.all()
-    var compMedLast = new CompMed()
-    yield response.sendView('compMed/create',{compMed:compMed.toJSON(),compMedLast:compMedLast.toJSON()})
+    const basicMed=yield BasicMed.all()
+    var compMedLast = yield CompMed.last()
+    if(compMedLast==null||compMedLast.price!=0){
+      console.log(compMedLast)
+      compMedLast=new CompMed()
+      compMedLast.price=0
+      yield compMedLast.save()
+    }
+    var total=yield Database.from('compoundings').sum('subtotal as total').where('CompMedId',compMedLast.id)
+    console.log(total[0].total)
+    yield response.sendView('compMed/create',{compMed:compMed.toJSON(),compMedLast:compMedLast,basicMed:basicMed.toJSON(),total:total[0].total})
   }
 
   * store(request, response) {
     //store created data to database
-    const compMed = new CompMed()
     var res=0
-    const compounding=yield Compounding.all()
-    console.log(compounding)
-    // for each (var cmp in compounding){
-    //   if(cmp.compMedID ==compMed.id){
-    //     const basicMed=yield BasicMed.findBy('id',request.param('id'))
-    //     res=res+basicMed.pricePerGram
-    //   }
-    // }
-    compMed.price=res
-
-    yield compMedData.save()
+    var compMedLast = yield CompMed.last()
+    var total=yield Database.from('compoundings').sum('subtotal as total').where('CompMedId',compMedLast.id)
+    compMedLast.price=total[0].total
+    console.log(compMedLast.price)
+    yield compMedLast.save()
+    const compMed=yield CompMed.all()
+    yield response.sendView('compMed/index',{compMed:compMed.toJSON()})
   }
 
   * show(request, response) {

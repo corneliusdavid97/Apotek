@@ -39,7 +39,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-10 col-md-offset-1">
-                    <h1 class="page-header">Forms</h1>
+                    <h1 class="page-header">Compound Medicine</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -58,19 +58,27 @@
                                     <tr>
                                         <th>Item ID</th>
                                         <th>Item Name</th>
-                                        <th>Price</th>
+                                        <th>Price (gr)</th>
+																				<th>Quantity</th>
+																				<th>Subtotal</th>
+																				<th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                         				{% for compMed in compMed %}
-                        					{% if compMed.id==compMedLast.id %}{
-																	<tr>
-																		<td>{{ compMed.id }}</td>
-																		<td>{{ compMed.name }}</td>
-																		<td>{{ compMed.Price }}</td>
-																		<th><a href="compMed/{{compMed.id}}">View</a></th>
-																	</tr>
-																	}
+                        					{% if compMed.compMedID == compMedLast.id %}
+																		{% for basicMed in basicMed %}
+																			{% if basicMed.id == compMed.basicMedID %}
+																				<tr>
+																					<td>{{ basicMed.id }}</td>
+																					<td>{{ basicMed.name }}</td>
+																					<td>{{ basicMed.pricePerGram }}</td>
+																					<td>{{ compMed.quantity }}</td>
+																					<td>{{ compMed.subtotal }}</td>
+																					<th><a href="http://localhost:3333/compounding/{{ compMed.id }}">View</a></th>
+																				</tr>
+																			{% endif %}
+																		{% endfor %}
 																	{% endif %}
                         				{% endfor %}
                         			</tbody>
@@ -78,9 +86,15 @@
                             <!-- /.table-responsive -->
 
 														<div class="form-group">
-															<div class="col-sm-10">
-																{{ form.submit('Compound','submit', { class: ' btn btn-success'}) }}
-															</div>
+														<div class="col-sm-9">
+															{{ form.submit('Compound','submit', { class: ' btn btn-success'}) }}
+														</div>
+														<div class="col-sm-1">
+															{{ form.label('labelTotal','Total:',{ class: 'control-label'}) }}
+														</div>
+														<div class="col-sm-2">
+															{{ form.text('total',total, { class: 'form-control'}) }}
+														</div>
 														</div>
 
                         </div>
@@ -106,12 +120,12 @@
 
 																		<div class="form-group">
 																				{{ form.label('id','Item Id',{ class: 'control-label'}) }}
-																				{{ form.text('id','',{ class: 'form-control'})}}
+																				<input type="text" id='medId' name="medId" class="form-control" placeholder="Medicine Id" readonly>
 																		</div>
 
                                       <div class="form-group">
                                           {{ form.label('name','Item Name',{ class: 'control-label'}) }}
-                                          {{ form.text('name','',{ class: 'form-control'})}}
+                                          <input type="text" id='medName' name="medName" class="form-control" onkeyup="medFunction()" placeholder="Enter medicine name here...">
                                       </div>
 
                                       <div class="form-group">
@@ -119,12 +133,58 @@
                                           {{ form.text('quantity','',{ class: 'form-control'})}}
                                       </div>
 
+                                      <script>
+                                      function medFunction() {
+                                        // Declare variables
+                                        var input, filter, table, tr, td, i;
+                                        input = document.getElementById("medName");
+                                        filter = input.value.toUpperCase();
+                                        table = document.getElementById("medTable");
+                                        tr = table.getElementsByTagName("tr");
+
+                                        // Loop through all table rows, and hide those who don't match the search query
+                                        for (i = 0; i < tr.length; i++) {
+                                          td = tr[i].getElementsByTagName("td")[1];
+                                          if (td) {
+                                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                              document.getElementById('medId').value = tr[i].getElementsByTagName("td")[0].innerText
+                                              tr[i].style.display = "";
+                                            } else {
+                                              tr[i].style.display = "none";
+                                            }
+                                          }
+                                        }
+                                      }
+                                      </script>
+
+                                      <table id="medTable" class="table table-striped table-bordered table-hover row-clickable" data-href='url://'>
+                                        <thead>
+                                          <tr>
+                                            <th>id</th>
+                                            <th>Item Name</th>
+                                            <th>Price (gr)</th>
+                                            <th>stock</th>
+                                          </tr>
+                                        </thead>
+                                          <tbody>
+                                          {% for basicMed in basicMed %}
+                                            <tr>
+                                              <td>{{ basicMed.id }}</td>
+                                              <td>{{ basicMed.name }}</td>
+                                              <td>{{ basicMed.pricePerGram }}</td>
+                                              <td>{{ basicMed.stock }}</td>
+                                            </tr>
+                                          {% endfor %}
+                                        </tbody>
+                                      </table>
+
                                       <div class="form-group">
                                         <div class="col-sm-10">
                                           {{ form.submit('Add Item','submit', { class: ' btn btn-success'}) }}
                                         </div>
                                       </div>
                                     {{ form.close() }}
+
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
 

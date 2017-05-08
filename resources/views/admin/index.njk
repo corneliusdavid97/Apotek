@@ -22,7 +22,12 @@
     			{{ form.button('Consumer IUD','', { class: 'btn btn-success'}) }}
     		{{ form.close() }}
 			</div>
-
+			<div class="col-md-2 col-md-offset-1">
+				<form class="form-horizontal" role="form" method="POST" action="/logout">
+						{{ csrfField }}
+					{{ form.button('Logout','', { class: 'btn btn-danger'}) }}
+				</form>
+			</div>
 	</div>
 
 {% endblock %}

@@ -8,7 +8,7 @@ class CompoundedmedicinesTableSchema extends Schema {
     this.create('compounded_medicines', (table) => {
       table.increments()
       table.timestamps()
-      table.integer('price').unique()
+      table.integer('price')
     })
   }
 

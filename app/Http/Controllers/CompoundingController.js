@@ -2,6 +2,7 @@
 
 const Compounding = use('App/Model/Compounding')
 const CompMed = use('App/Model/CompoundedMedicine')
+const BasicMed = use('App/Model/BasicMedicine')
 
 class CompoundingController {
 
@@ -19,22 +20,18 @@ class CompoundingController {
   * store(request, response) {
     //store created data to database
     const compoundingData = request.except('_csrf','submit')
+    var compMedLast = yield CompMed.last()
     const compounding = new Compounding()
-    const last=yield CompMed.last()
-    var id
-    if(last==null){
-      id=1
-    }else{
-      if(last.price==null){
-        const tmp=new CompMed()
-        yield tmp.save()
-      }else{
-        id=last.id
-      }
-    }
-    compounding.basicMedID=compoundingData.id
-    compounding.compMedID=id
+    const basicMed= yield BasicMed.findBy('id',compoundingData.medId)
+    compounding.basicMedID=compoundingData.medId
+    compounding.quantity=compoundingData.quantity
+    compounding.compMedID=compMedLast.id
+    compounding.subtotal=compounding.quantity*basicMed.pricePerGram
+    console.log(compounding)
+    basicMed.stock=basicMed.stock-compoundingData.quantity
+    yield basicMed.save()
     yield compounding.save()
+    yield response.redirect('/compMed/create')
   }
 
   * show(request, response) {
@@ -66,7 +63,7 @@ class CompoundingController {
     //delete selected data
     const compounding=yield Compounding.findBy('id',request.param('id'))
     yield compounding.delete()
-    yield response.redirect('/compounding')
+    yield response.redirect('/compMed/create')
   }
 }
 

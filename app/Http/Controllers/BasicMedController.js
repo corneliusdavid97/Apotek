@@ -19,6 +19,8 @@ class BasicMedController {
     //store created data to database
     const basicMedData = request.except('_csrf','submit')
     yield BasicMed.create(basicMedData)
+    const basicMed=yield BasicMed.all()
+    yield response.sendView('basicMed/index',{basicMed:basicMed.toJSON()})
   }
 
   * show(request, response) {

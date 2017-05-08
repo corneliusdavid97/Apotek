@@ -38,13 +38,6 @@
     				{{ form.close() }}
 
     			</td>
-    			<td>
-    				{{ form.open({ route: 'compounding.destroy', params: {id: compounding.id} }) }}
-    					{{csrfField}}
-    					{{ form.button('Delete','', { class: 'btn btn-danger '}) }}
-
-    				{{ form.close() }}
-    			</td>
     		</tr>
 		</table>
 	</div>
